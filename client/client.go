@@ -219,7 +219,7 @@ func (client *Client) getSessionID() (string, error) {
 	path := "/j_security_check"
 	body := []byte(fmt.Sprintf("j_username=%s&j_password=%s", client.username, client.password))
 
-	req, err := client.MakeRequest(method, path, nil, body, nil, false)
+	req, err := client.MakeRequest(method, path, nil, body, false)
 	if err != nil {
 		return "", err
 	}
@@ -249,7 +249,7 @@ func (client *Client) getSessionID() (string, error) {
 func (client *Client) getToken(jsessionID string) (string, error) {
 	method := "GET"
 	path := "/dataservice/client/token"
-	req, err := client.MakeRequest(method, path, nil, nil, nil, false)
+	req, err := client.MakeRequest(method, path, nil, nil, false)
 	if err != nil {
 		return "", err
 	}
