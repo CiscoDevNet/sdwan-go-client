@@ -108,7 +108,7 @@ func GetClient(clientURL, username, password, proxy, proxyCreds string, rateLimi
 }
 
 //MakeRequest generate the HTTP request with required headers
-func (client *Client) MakeRequest(method, path string, body *container.Container, bodyBytes []byte, bodyBuffer *bytes.Buffer, authenticated bool) (*http.Request, error) {
+func (client *Client) MakeRequest(method, path string, body *container.Container, bodyBytes []byte, authenticated bool) (*http.Request, error) {
 	url, err := url.Parse(path)
 	if err != nil {
 		return nil, err
@@ -120,8 +120,6 @@ func (client *Client) MakeRequest(method, path string, body *container.Container
 		req, err = http.NewRequest(method, reqURL.String(), bytes.NewBuffer(body.Bytes()))
 	} else if bodyBytes != nil {
 		req, err = http.NewRequest(method, reqURL.String(), bytes.NewBuffer(bodyBytes))
-	} else if bodyBuffer != nil {
-		req, err = http.NewRequest(method, reqURL.String(), bodyBuffer)
 	} else {
 		req, err = http.NewRequest(method, reqURL.String(), nil)
 	}
